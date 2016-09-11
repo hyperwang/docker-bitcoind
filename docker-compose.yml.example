@@ -1,0 +1,28 @@
+version: '2'
+services:
+  bitcoind:
+    image: bitcoind
+    ports:
+      - "8331:8331"
+      - "8332:8332"
+      - "8333:8333"
+      - "18332:18332"
+      - "18333:18333"
+    restart: always
+    hostname: HOSTNAME
+    environment:
+        BITCOIND_HOST: HOSTIP 
+        BITCOIND_RPCUSER: haobtc
+        BITCOIND_RPCPASSWORD: defaultpassword
+        BITCOIND_TESTNET: 0
+        BITCOIND_RPCALLOWIP: 10.0.0.1,10.0.0.2,10.0.0.3
+        BITCOIND_ADDNODE: 10.0.0.1,10.0.0.2,10.0.0.3
+        BITCOIND_CONNECT: 10.0.0.1,10.0.0.2,10.0.0.3
+        BITCOIND_ZMQPUBRAWBLOCK: tcp://0.0.0.0:8331
+        BITCOIND_ZMQPUBRAWTX: tcp://0.0.0.0:8331
+        BITCOIND_ZMQPUBHASHTX: tcp://0.0.0.0:8331
+        BITCOIND_ZMQPUBHASHBLOCK: tcp://0.0.0.0:8331
+        BITCOIND_BLOCKMAXSIZE: 1000000
+        BITCOIND_DBCACHE: 2000
+    volumes:
+      - /work/bitcoin:/root/.bitcoin
